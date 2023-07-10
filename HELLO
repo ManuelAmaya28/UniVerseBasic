@@ -1,0 +1,4 @@
+OPEN "MEMBERS" TO MEMBERS.FILE ELSE STOP "Lo siento, no se puede abrir el archivo VOC"
+READ REC FROM MEMBERS.FILE, "0003" ELSE STOP "No se pudo acceder a first_name"
+PRINT REC<2>:" ":REC<1>
+END

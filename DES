@@ -1,0 +1,89 @@
+*Programa 1
+*Desarrolle en Universe Basic lo siguiente.
+*La empresa QUÁLITAS solicita se realice un programa que sea capaz de facturar sus productos, agrupándolos en no más
+*de 5 productos por factura, donde se deberá solicitar los datos del cliente, código de producto, 
+*costo de producto, verificando que el costo de los productos sea mayor a 0, el programa debe desglosar subtotal, el IVA y el total.
+
+*************************************************************************
+* Nombre     : FDPQ
+* Autor      : MANUEL AMAYA
+* Objetivo   : Realizar facturas de 5 productos
+* Procedencia: PRUEBA
+************************************************************************
+CRT @(16, 2) : "** FACTURACION DE PRODUCTOS QUALITAS **"
+
+*Se solicita nombre con validaciones
+FNAME: CRT @(5, 8) : "Ingresa tu primer nombre" :
+LNAME: CRT @(5, 10) : "Ingresa tu primer apellido" :
+    LOOP
+    FOR I = 1 TO 2; ON I GOSUB 10, 20
+    NEXT I
+         CRT @(27,8):SPACE(20):
+         CRT @(29,10):SPACE(20):
+    REPEAT
+10:
+    CRT @(27, 8):@(27):; INPUT FIRST_NAME :
+    IF FIRST_NAME MATCH "0A" AND FIRST_NAME # "" THEN CRT @(29, 10):@(29) ELSE GOSUB 10
+
+20:
+    CRT @(29, 10):@(29):; INPUT LASTNAME :
+    IF LASTNAME MATCH "0A" AND LASTNAME # "" THEN GOSUB 020 ELSE GOSUB 20
+*CONTPROD Funciona como contador de los productos que se ingresaron
+020: *Se realiza registro de codigo y costo del producto
+    CONTPROD = 0
+    DIM REGISTRO.ARRAY(5, 2)
+    FOR PRODUCTO = 1 TO 5
+        PRINT "INGRESA LA SIGUIENTE INFORMACION DEL PRODUCTO " : PRODUCTO
+        FOR CHAR = 1 TO 2
+CICLO:      IF CHAR = 1 THEN PRINT "Ingresa el codigo del PRODUCTO " : PRODUCTO; PROMPT "#" ELSE PRINT "Ingresa el costo del PRODUCTO " : PRODUCTO; PROMPT "$"
+            INPUT REGISTRO.ARRAY(PRODUCTO, CHAR)
+            *Validacion de que la informacion es correcta
+            IF REGISTRO.ARRAY (PRODUCTO, CHAR) <= 0 OR REGISTRO.ARRAY (PRODUCTO, CHAR) = "" OR REGISTRO.ARRAY (PRODUCTO, CHAR) MATCH "0A" THEN PRINT "Valor invalido"; GOTO CICLO
+        NEXT CHAR
+        *Se suma un producto al contador
+        CONTPROD += 1
+        *Pendiente realizar preguntar si se desea agregar mas productos
+        IF PRODUCTO # 5 THEN GOTO CASECON ELSE GOSUB 030
+CASECON: PROMPT "?"
+        CRT @(0, 0) : "Desea continuar agregando productos? Y/N" :
+        INPUT CONTINUAR, 1
+        BEGIN CASE
+            CASE CONTINUAR = "Y"
+                GOTO AGREGAR
+            CASE CONTINUAR = "N"
+                GOSUB 030
+            CASE 1
+                PRINT "INTENTA DE NUEVO"
+                GOTO CASECON
+        END CASE
+
+AGREGAR: NEXT PRODUCTO
+    GOSUB 030
+    RETURN
+
+030: *Imprimir factura
+    PROMPT = ""
+    SUMA = 0
+    PRINT "     FACTURA"
+    PRINT "*Nombre del comprador: "
+    PRINT FIRST_NAME : " " : LASTNAME
+    PRINT "*******************"
+    PRINT "*Listado de productos"
+
+    FOR PRODUCTO = 1 TO CONTPROD
+        PRINT "*******************"
+        PRINT "*PRODUCTO #" : PRODUCTO
+        FOR CHAR = 1 TO 2
+            IF CHAR = 1 THEN PRINT "*Codigo #" : REGISTRO.ARRAY (PRODUCTO, CHAR) ELSE PRINT "*Costo $" : REGISTRO.ARRAY (PRODUCTO, CHAR); SUMA += REGISTRO.ARRAY (PRODUCTO, CHAR)
+        NEXT CHAR
+    NEXT PRODUCTO
+    PRINT "*******************"
+    PRINT "SUBTOTAL"
+    PRINT CHAR(36) : SUMA
+    PRINT CHAR(32)
+    PRINT "IVA 16%"
+    PRINT CHAR(36) : SUMA * (0.16)
+    PRINT CHAR(32)
+    PRINT "TOTAL"
+    PRINT CHAR(36) : SUMA * (1.16)
+    END

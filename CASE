@@ -1,0 +1,14 @@
+10: PRINT @(0,0):"Y/N":
+INPUT OPCION
+BEGIN CASE
+    CASE OPCION = "Y"
+        PRINT "YES"
+    CASE OPCION = "N"
+        PRINT "NO"
+        STOP
+    CASE 1
+        PRINT "ELIGE DE NUEVO"
+        GOTO 10
+END CASE
+GOTO 10
+END

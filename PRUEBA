@@ -1,0 +1,19 @@
+      PRINT "Hola mundo!"
+   END
+
+*ESTE CODIGO SE DESARROLLO DESDE UNIVERSE SHELL, CON LOS SIGUIENTES COMANDOS
+
+* >ED BP HELLO.WORLD
+* New record.
+
+* ----: I
+* 0001= PRINT 'Hello world!'
+* 0002= END
+* 0003= (Press ENTER)
+* Bottom at line 2.
+* ----: FORMAT
+* ??FB??
+* ----: P
+* ??FB??
+* ----: FI
+* Record "HELLO.WORLD" filed in file "BP".

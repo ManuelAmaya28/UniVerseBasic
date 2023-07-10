@@ -1,0 +1,4 @@
+OPEN "MEMBERS" TO MEMBERS.FILE ELSE STOP "Lo siento, no encontramos MEMBERS"
+READ REC FROM MEMBERS.FILE, "0003" ELSE STOP "Lo siento, no encontramos a 0003"
+PRINT REC <2>
+END

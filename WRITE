@@ -1,0 +1,30 @@
+*Abrimos el archivo MEMBERS
+OPEN "MEMBERS" TO MEMBERS.FILE ELSE STOP "Lo siento, no se puede abrir el archivo VOC"
+
+*Creamos un array dimensional vacio y posteriormente escribimos datos dentro de él
+DIM MEMBER.ARRAY(22)
+MEMBER.ARRAY(1) = "Manuel"
+MEMBER.ARRAY(2) = "Amaya"
+MEMBER.ARRAY(3) = "B"
+MEMBER.ARRAY(4) = "Mr"
+MEMBER.ARRAY(5) = "97067 Inalambrica"
+MEMBER.ARRAY(6) = "Parsons"
+MEMBER.ARRAY(7) = "MI"
+MEMBER.ARRAY(8) = "670E69"
+MEMBER.ARRAY(9) = "9999506963"
+MEMBER.ARRAY(10) = "999493508"
+MEMBER.ARRAY(11) = "manuel.amaya.acosta@hotmail.com"
+MEMBER.ARRAY(12) = "999999952"
+MEMBER.ARRAY(22) = "JAJAJA AT THE END"
+MATWRITE MEMBER.ARRAY TO MEMBERS.FILE, "2501" ELSE STOP "No se pudo escribir en MEMBERS"
+
+*Creamos un array dimensional vacio para leer por medio un ciclo FOR los datos de MEMBER 2501
+DIM VOC.RECORD(22)
+MATREAD VOC.RECORD FROM MEMBERS.FILE, '2501' ELSE STOP 'No se encontro al usuario'
+FOR FIELD.NUMBER = 1 TO 22
+   PRINT VOC.RECORD(FIELD.NUMBER)
+NEXT FIELD.NUMBER
+END
+* READ REC FROM MEMBERS.FILE, id ELSE STOP "No se pudo acceder a first_name"
+* PRINT REC<2>:" ":REC<1>
+* END

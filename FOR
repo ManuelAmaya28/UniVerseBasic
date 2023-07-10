@@ -1,0 +1,10 @@
+PRINT "******FOR*********"
+FOR X=1 TO 10
+PRINT "X= ":X
+NEXT X
+
+PRINT "******FOREdad*****"
+FOR Y=1997 TO 2023
+PRINT "Edad ":Y
+NEXT Y
+END

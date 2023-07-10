@@ -1,0 +1,8 @@
+PRINT "Bienvenido a la casa de la sumas"
+PRINT "Ingresa tu primer número: "
+INPUT A
+PRINT "Ingresa tu segundo número"
+INPUT B
+C= A+B
+PRINT "El resultado es: " : C
+END
