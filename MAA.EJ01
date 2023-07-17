@@ -1,0 +1,37 @@
+*
+***************************************************************************
+* NOMBRE      : PRIMER.PGM
+* AUTOR       : HUGO ANTONIO CHAVEZ SANCHEZ 14/07/2023
+* OBJETIVO    : PRIMER PROGRAMA PGM EN SISE DE PROVEEDORES IDR UNIVERSITY
+* PROCEDENCIA : 
+***************************************************************************
+
+***************************************************************************
+NOM.PROGV = "PRIMER.PGM"
+VER.PROGV = 1.0 .0
+DES.PROGV = "MODULO DE EJEMPLO PARA DEMOSTRACION DE PROCESOS BASIC EN UV"
+***************************************************************************
+
+OPEN "TVARIAS" TO TV.A ELSE STOP 201, "TVARIAS"
+READ COBS FROM TV.A, "COB.SIN" THEN
+
+
+    FMS = DCOUNT(COBS, @FM)
+    VMS = DCOUNT(COBS<1>, @VM)
+
+    *FOR FM=1 TO FMS
+    FOR VM = 1 TO VMS
+        IF VM = 1 THEN
+            PRINT "COB"
+        END
+
+        PRINT COBS<1, VM> "R#3"
+    NEXT VM
+    *NEXT FM
+
+END ELSE
+    CRT "NO ES POSIBLE ABRIR REGISTRO TVARIAS COB.SIN"
+END
+
+CRT "SE ABRIO EL ARCHIVO TVARIAS"
+RETURN

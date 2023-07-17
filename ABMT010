@@ -1,0 +1,148 @@
+*
+*************************************************************************
+* Nombre     : ABMT010
+* Autor      : SISTRAN S.R.L.
+* Objetivo   : Cargar el porcentaje de ajuste automatico
+* Procedencia: PROC
+************************************************************************
+*-
+*** ASIGNACION DE ARCHIVOS
+      OPEN "TVARIAS" TO TV.A ELSE STOP 201, "TVARIAS"
+*
+*** ASIGNACION DE VARIABLES
+      READ AJUSTE.R FROM TV.A,"AJUSTE" ELSE AJUSTE.R=""
+      READV CUENTA FROM TV.A,"EMPRESA",1 ELSE CUENTA=""
+      PROMPT""
+      EOL=@(-4) ; ESC="F" ; CLAVE="" ; AM=CHAR(254) ; ERROR=0 ; FIN=0
+*
+*** PROCESO
+      CRT @(-1)
+      CRT @(0,0):CUENTA:@(59):TIMEDATE():
+      CRT @(16,2):"** ACTUALIZACION DEL AJUSTE AUTOMATICO **":
+      CRT @(5,8):"Anio            :":
+      CRT @(5,10):"Mes             :":
+      CRT @(5,12):"% de Ajuste     :":
+      CRT @(5,13):"% Ajus. Premium :":
+      LOOP
+         RTA=0
+         FOR I=1 TO 2 UNTIL FIN
+            ON I GOSUB 100,200
+         NEXT I
+      UNTIL FIN DO
+         LOCATE(CLAVE,AJUSTE.R,1 ; POS) THEN
+            GOSUB 10300
+            GOSUB 10400
+         END ELSE
+            GOSUB 300
+            GOSUB 400
+            IF FIN THEN GOTO 9
+         END
+         IF NOT(FIN) THEN
+            CRT @(2,22):"Desea modificar?,ingrese opcion :    (M=Modifica , N=No modifica, A=Anula)":
+            LOOP
+30:            CRT @(36,22):".":@(36): ; INPUT RTA,1:
+            UNTIL RTA="M" OR RTA="N" OR RTA="A" DO REPEAT
+            BEGIN CASE
+               CASE RTA="N"
+                  FIN=0
+                  AJUSTE.R<1,POS>=CLAVE
+                  WRITE AJUSTE.R ON TV.A,"AJUSTE"
+               CASE RTA="A" ; RETURN
+               CASE RTA="M"
+                  GOSUB 300
+                  FIN=0 ; GOTO 30
+               CASE 1 ; GOTO 30
+            END CASE
+         END
+9:       CRT @(25,8):SPACE(20):
+         CRT @(25,10):SPACE(20):
+         CRT @(25,12):SPACE(25):
+      REPEAT
+      STOP
+*
+10:***
+*
+      CRT @(0,23):OCONV(ERROR"R%3","TTERR.MSG;X;1;1"):" ": ; INPUT ARQ:
+      CRT @(0,23):EOL:
+      RETURN
+*
+100:*** Ingreso del ano
+*
+      DAT=CLAVE[1,2]
+      LOOP
+         CRT @(25,8):STR(".",2):@(25): ; INPUT Y,2:
+         ERROR=0
+         BEGIN CASE
+            CASE Y="F" ; GOSUB 10100 ; FIN=1 ; RETURN
+            CASE Y="" & DAT="" ; ERROR=3
+            CASE Y="" ; Y=DAT
+            CASE NUM(Y)
+               Y=Y"R%2" ; DAT=Y
+            CASE 1 ; ERROR=7
+         END CASE
+      WHILE ERROR # 0 DO GOSUB 10 REPEAT
+      IF FIN#1 THEN CLAVE=DAT:CLAVE[3,2]
+      GOSUB 10100
+      RETURN
+*
+200:*** Ingreso del mes para la clave
+*
+      DAT=CLAVE[3,2]
+      LOOP
+         CRT @(25,10):STR(".",2):@(25): ; INPUT Y,2:
+         ERROR=0
+         BEGIN CASE
+            CASE Y="F" ; GOSUB 10200 ; FIN=1 ; RETURN
+            CASE Y="" & DAT="" ; ERROR=3
+            CASE Y="" ; Y=DAT
+            CASE NUM(Y)
+*               IF Y<0 OR Y>12 THEN ERROR=50 ELSE DAT=Y"R%2"
+               DAT=Y"R%2"          ; * ILI 28/05/2010. Se quita la restricción para el mes
+            CASE 1 ; ERROR=7
+         END CASE
+      WHILE ERROR # 0 DO GOSUB 10 REPEAT
+      IF FIN#1 THEN CLAVE=CLAVE[1,2]:DAT
+      GOSUB 10200
+      RETURN
+*
+300:*** Ingreso del % para ajuste automatico
+*
+      DAT=AJUSTE.R<2,POS>
+      LOOP
+         CRT @(25,12):STR(".",6):@(25): ; INPUT Y,6:
+         ERROR=0
+         BEGIN CASE
+            CASE Y="F" ; GOSUB 10300 ; FIN=1 ; RETURN
+            CASE Y="" & DAT="" ; ERROR=3
+            CASE Y="" ; Y=DAT
+            CASE NUM(Y) AND Y >0 ; DAT=ICONV(Y,"MR2")
+            CASE 1 ; ERROR=7
+         END CASE
+      WHILE ERROR # 0 DO GOSUB 10 REPEAT
+      IF FIN#1 THEN AJUSTE.R<2,POS>=DAT
+      GOSUB 10300
+      RETURN
+400:*** Ingreso del % de ajuste para PREMIUM
+*
+      DAT=AJUSTE.R<3,POS>
+      LOOP
+         CRT @(25,13):STR(".",6):@(25): ; INPUT Y,6:
+         ERROR=0
+         BEGIN CASE
+            CASE Y="F" ; GOSUB 10300 ; FIN=1 ; RETURN
+            CASE Y="" & DAT="" ; ERROR=3
+            CASE Y="" ; Y=DAT
+            CASE NUM(Y) AND Y >0 ; DAT=ICONV(Y,"MR2")
+            CASE 1 ; ERROR=7
+         END CASE
+      WHILE ERROR # 0 DO GOSUB 10 REPEAT
+      IF FIN#1 THEN AJUSTE.R<3,POS>=DAT
+      GOSUB 10400
+      RETURN
+*
+10100:CRT @(25,8):CLAVE[1,2]"L#2": ; RETURN
+*
+10200:CRT @(25,10):CLAVE[3,2]"L#2": ; RETURN
+10300:CRT @(25,12):OCONV(AJUSTE.R<2,POS>,"MR2Z")"R#6": ; RETURN
+10400:CRT @(25,13):OCONV(AJUSTE.R<3,POS>,"MR2Z")"R#6": ; RETURN
+*

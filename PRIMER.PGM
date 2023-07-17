@@ -1,0 +1,68 @@
+*
+***************************************************************************
+* NOMBRE      : PRIMER.PGM
+* AUTOR       : HUGO ANTONIO CHAVEZ SANCHEZ 14/07/2023
+* OBJETIVO    : PRIMER PROGRAMA PGM EN SISE DE PROVEEDORES IDR UNIVERSITY
+* PROCEDENCIA : 
+***************************************************************************
+
+***************************************************************************
+  NOM.PROGV="PRIMER.PGM"
+  VER.PROGV=1.0.0
+  DES.PROGV="MODULO DE EJEMPLO PARA DEMOSTRACION DE PROCESOS BASIC EN UV"
+***************************************************************************
+  
+  OPEN "TVARIAS" TO TV.A ELSE STOP 201, "TVARIAS";
+  
+* IF, LOCATE, OPEN, READ, WRITE
+
+ *ARR=""; ARR2=0
+ *ARR<1>="10"
+ *ARR<2>="10":@VM:"20"
+ *ARR<3>="11":@SM:"12":@VM:"21":@SM:"22":@SM:"23"
+ *
+ *PRINT "REGISTRO ARR"
+ *PRINT ARR
+ *PRINT "****************************************************"
+ *PRINT "CAMPO 1: ":ARR<1> 
+ *PRINT "CAMPO 2, VALOR 1: ":ARR<2,1>
+ *PRINT "CAMPO 2, VALOR 2: ":ARR<2,2>
+ *PRINT "CAMPO 3, VALOR 1, SUBVALOR 1: ":ARR<3,1,1>
+ *PRINT "CAMPO 3, VALOR 1, SUBVALOR 2: ":ARR<3,1,2>
+ *PRINT "CAMPO 3, VALOR 2, SUBVALOR 1: ":ARR<3,2,1>
+ *PRINT "CAMPO 3, VALOR 2, SUBVALOR 2: ":ARR<3,2,2>
+ *PRINT "CAMPO 3, VALOR 2, SUBVALOR 3: ":ARR<3,2,3>
+ *PRINTER ON
+  
+  READ COBS FROM TV.A, "COB.SIN" THEN
+    * @FM - MARCA DE CAMPOS EN VARIABLE DE ARREGLO DINAMICO
+    * @VM - MARCA DE VALORES EN VARIABLE DE ARREGLO DINAMICO
+    * @SM - MARCA DE SUBVALORES EN VARIABLE DE ARREGLO DINAMICO
+    
+    FMS=DCOUNT(COBS,@FM)
+    VMS=DCOUNT(COBS<1>,@VM)
+    
+    *FOR FM=1 TO FMS
+      FOR VM=1 TO VMS
+        IF VM=1 THEN
+          PRINT "COB"
+        END
+        
+        PRINT COBS<1,VM>"R#3"
+      NEXT VM
+    *NEXT FM
+    
+    * DENTRO DEL REGISTRO *COB.SIN* SE TIENEN DOS NIVELES, CAMPOS Y VALORES.
+   *PRINT "CAMPO 1: ":COBS<1>
+   *PRINT "CAMPO 2: ":COBS<2>
+   *PRINT "CAMPO 3: ":COBS<3>
+   *PRINT "CAMPO 4: ":COBS<4>
+   *PRINT "CAMPO 5: ":COBS<5>
+   *PRINT "CAMPO 6: ":COBS<6>
+  END ELSE 
+    CRT "NO ES POSIBLE ABRIR REGISTRO TVARIAS COB.SIN"
+  END
+   
+  CRT "SE ABRIO EL ARCHIVO TVARIAS"
+  RETURN
+  

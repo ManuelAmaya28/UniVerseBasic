@@ -1,0 +1,31 @@
+EJERCICIO:
+CREAR DESDE EL ARCHIVO DE DATOS TVARIAS, UN LISTADO EN PANTALLA Y EN IMPRESION DEL REGISTRO "COB.SIN", REALIZANDO LA SIGUIENTE ESTRUCTURA
+
+COB NM_COB......... DESCR_COB.......................... FD_SA FD_PMA
+ 01 DM              DANOS MATERIALES                       37     84
+ 02 RT              ROBO TOTAL                             37     84
+ 03 RC              RESPONSABILIDAD CIVIL                  38     85
+ 04 GM              GASTOS MEDICOS                         39     86
+ 05 EE              EQUIPO ESPECIAL                        41     87
+ 06 DM ADAP         ADAPTACIONES DANOS MATERIALES          43     88
+ 07 RT ADAP         ADAPTACIONES ROBO TOTAL                43     88
+ 08 PROLIB          PROLIBER                                        
+ 09 DM SPT          PERDIDA TOTAL (DM)                     37     84
+ 10 MCONDxAA        MUERTE CONDUCTOR X AA                 110    120
+ 11 GTPT            GTOS. DE TRANSP.x P.PARCIAL           313    315
+ 12 GL              GASTOS LEGALES                        112    122
+ 13 EXT RC          EXTENCION DE RC                       111    121
+ 14 EXE DED         EXENCION DE DEDUCIBLE                  37     84
+ 15 RC PAS          RC PASAJERO                            98    108
+ 16 ROBO PAR        ROBO PARCIAL                          159    171
+ 17 AJU AUT         AJUSTE AUTOMATICO                     164    174
+ 18 RC PERS         RC PERSONAS                           206    208
+ 19 RC BIEN         RC BIENES                             201    203
+ 20 RC COMP         RC COMPLEMENTARIA                     212    214
+ 21 AV              ASISTENCIAL VIAL                      167    177
+ 22 RC ECOL         RC ECOLOGICA                          184    186
+ 23 RC DOCUP        RC DANOS A OCUPANTES                  190    192
+ 24 DM CIVA         CIVA DANOS                            251    252
+ 25 RT CIVA         CIVA ROBO TOTAL                       251    252
+ 26 ASIS SAT        ASISTENCIA SATELITAL                  167    177
+ 
