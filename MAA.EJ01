@@ -13,25 +13,52 @@ DES.PROGV = "MODULO DE EJEMPLO PARA DEMOSTRACION DE PROCESOS BASIC EN UV"
 ***************************************************************************
 
 OPEN "TVARIAS" TO TV.A ELSE STOP 201, "TVARIAS"
+READV CUENTA FROM TV.A,"EMPRESA",1 ELSE CUENTA=""
 READ COBS FROM TV.A, "COB.SIN" THEN
 
+    CRT @(-1)
+    CRT @(0,0):CUENTA:@(59):TIMEDATE()
 
-    FMS = DCOUNT(COBS, @FM)
-    VMS = DCOUNT(COBS<1>, @VM)
+FOR PRTIME = 1 TO 2
+IF PRTIME = 2 THEN PRINTER ON
 
-    *FOR FM=1 TO FMS
-    FOR VM = 1 TO VMS
-        IF VM = 1 THEN
-            PRINT "COB"
-        END
+PRINT "COB NM_COB......... DESCR_COB.......................... FD_SA FD_PMA"
 
-        PRINT COBS<1, VM> "R#3"
-    NEXT VM
-    *NEXT FM
+FMS = DCOUNT(COBS, @FM)
+VMS = DCOUNT(COBS<1>, @VM)
+
+FOR VM = 1 TO VMS
+
+PRINT COBS<1,VM> "R#3":" ":
+PRINT COBS<2,VM> "L#15":" ":
+PRINT COBS<3,VM> "L#35":" ":
+PRINT COBS<4,VM> "R#5":" ":
+PRINT COBS<6,VM> "R#6"
+
+NEXT VM
+NEXT PRTIME
 
 END ELSE
-    CRT "NO ES POSIBLE ABRIR REGISTRO TVARIAS COB.SIN"
+   CRT "NO ES POSIBLE ABRIR REGISTRO TVARIAS COB.SIN"
 END
 
-CRT "SE ABRIO EL ARCHIVO TVARIAS"
-RETURN
+
+*    FMS = DCOUNT(COBS, @FM)
+*    
+*    FOR FM=1 TO FMS
+*    VMS = DCOUNT(COBS<FM>, @VM)
+*    CRT @(FM,1):"Encabezado"
+*    FOR VM = 1 TO VMS
+*        *IF VM = 1 THEN
+*         *   CRT @(2,1):"COB"
+*        *END
+*        BEGIN CASE
+*        CASE FM=1
+*        PRINT COBS<FM, VM> @(20,20):"R#20"
+*        CASE 1
+*        PRINT "Vacio"
+*        END CASE
+*
+*        PRINT COBS<FM, VM> "R#20"
+*    NEXT VM
+*    NEXT FM

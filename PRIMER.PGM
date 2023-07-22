@@ -12,7 +12,7 @@
   DES.PROGV="MODULO DE EJEMPLO PARA DEMOSTRACION DE PROCESOS BASIC EN UV"
 ***************************************************************************
   
-  OPEN "TVARIAS" TO TV.A ELSE STOP 201, "TVARIAS";
+  OPEN "TVARIA" TO TV.A ELSE STOP 201, "TVARIAS";
   
 * IF, LOCATE, OPEN, READ, WRITE
 

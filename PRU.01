@@ -1,0 +1,46 @@
+************************************************************************
+* Nombre     : FACTU.MAN
+* Autor      : Hugo Antonio Chavez Sanchez 06/04/2011
+* Objetivo   : Creacion de Facturas Manuales Electronicas de la Serie T
+* Procedencia: PROC FACTU-TES
+************************************************************************
+  COM /SRPT/USUARIO,OFICINA
+  
+  OPEN "PRUEBA.FACT" TO PRU.A ELSE STOP 201,"PRUEBA.FACT";
+  OPEN "TVARIAS" TO TV.A ELSE STOP 201,"TVARIAS";
+  
+  READV CUENTA FROM TV.A, "EMPRESA", 1 ELSE CUENTA="";
+  
+  * INGRESAR SENTENCIA AL MOMENTO DE GRABAR INFORMACION CARGADA EN MODULO
+  READU FOLIO FROM TV.A, "CONTADOR.FACT" THEN
+    FOLIO+=1; * FOLIO"R%10": 1 - 0000000001
+    WRITE FOLIO TO TV.A, "CONTADOR.FACT"
+  END ELSE
+    ERROR="Error al recuperar informacion de folio de facturacion"
+  END
+  
+  RELEASE TV.A, "CONTADOR.FACT"
+  
+  CRT @(-1)
+  CRT @(01,00):CUENTA:@(59):TIMEDATE()
+  CRT @(19,01):"*** EJERCICIO DE FACTURACION SISE - IDR ***"
+  CRT @(00,04):STR("-",80):
+  
+  PRODS=""
+  PRODS<1,1>="EDB12345"
+  PRODS<1,2>="12313213"
+  PRODS<2,1>="PRODUCTO EDB DE MUESTRA"
+  PRODS<2,2>="PRODUCTO DE MUESTRA 12321321"
+  
+  LOCATE "EDB12349" IN PRODS<1> SETTING PPROD THEN
+    DESCR=PRODS<2,PPROD>
+  END
+  
+  *CRT @(00,00):@(-3)
+  
+  PROMPT ""
+  
+  CRT @(01,03):"Nombre: ":STR(".",65)
+  CRT @(09,03):;INPUT NOMBRE,65_
+  RETURN
+  

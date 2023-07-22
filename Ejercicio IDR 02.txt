@@ -1,0 +1,39 @@
+QUALITAS                                                    09:27:58 21 JUL 2023
+                 *** EJERCICIO DE FACTURACION SISE - IDR ***
+                 
+ Nombre: .....................................................................
+--------------------------------------------------------------------------------
+ID CANT PRODUCTO DESCRIPCION                    MONTO_PROD IVA MONTO_TOTAL
+01 .... ........ ..............................  10,000.00 16%   23,200.00
+02 .... ........ ..............................  10,000.00 16%   23,200.00
+03 .... ........ ..............................  10,000.00 16%   23,200.00
+04 .... ........ ..............................  10,000.00 16%   23,200.00
+05 .... ........ ..............................  10,000.00 16%   23,200.00
+F.
+
+
+
+
+
+
+
+
+RESUMEN: PRODUCTO 1 - 5, SUBTOTAL: 13132, IVA: 908098, TOTAL: 989080
+DESEA FINALIZAR SU COMPRA (S,N,A): 
+
+
+EJERCICIO
+Desarrollar un proceso que solicite el nombre de un cliente y permita elegir la compra de hasta 5 productos de una lista de 10 productos (no repetir productos en la lista).
+Al finalizar coforme a la definción de la pantalla puesta en las primeras líneas de este archivo (hasta línea 22) debe presetnarse el resumente de los productos seleccionados
+para posterior elegir si se quiere finalizar las operaciones grabando o no, los productos cargados o en todo caso si desea anular la compra.
+La estructura del registro cargada en el archivo de datos PRUEBA.FACT, debera tener la siguiente forma, donde el folio se debera tomar del registro CONTADOR.FACT, del archvio
+de datos TVARIAS, quedando la llave del archivo PRUEBA.FACT a diez digitos. Ejemplo 0000000001, 0000000123.
+1> ASLDJASLKDJSALKDJASLKDJASLKDJASLDKJASDSALKJDALSKDSA
+2> DATE
+3> HORA
+4> SUBTOTAL
+5> IVA
+6> TOTAL
+De este campo en adelante de forma multivaluada se debera grabar la inforamcion cargada en el módulo
+7> 
+8> 0'90'9'099'ý09809808098ý98908098
